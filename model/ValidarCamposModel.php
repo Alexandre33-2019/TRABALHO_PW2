@@ -1,15 +1,6 @@
 <?php
 
-function ValidarEmail ($email)
-{
-    include "conexao.php";
 
-    $sql = $conn->prepare("SELECT * FROM usuario WHERE email = ?");
-    $sql->bind_param("s",$email);
-    $sql->execute();
-    $resultado = $sql->get_result();
-    return $linha;
-}
 
 function ValidarCPF ($cpf)
 {
@@ -19,8 +10,23 @@ function ValidarCPF ($cpf)
     $sql->bind_param("s",$cpf);
     $sql->execute();
     $resultado = $sql->get_result();
+    $linha = $resultado->fetch_assoc();
     return $linha;
 }
+
+function ValidarEmail ($email)
+{
+    include "conexao.php";
+
+    $sql = $conn->prepare("SELECT * FROM usuario WHERE email = ?");
+    $sql->bind_param("s",$email);
+    $sql->execute();
+    $resultado = $sql->get_result();
+    $linha = $resultado->fetch_assoc();
+    return $linha;
+}
+
+
 
 function ValidarUsuario ($newUser)
 {
@@ -30,6 +36,7 @@ function ValidarUsuario ($newUser)
     $sql->bind_param("s",$newUser);
     $sql->execute();
     $resultado = $sql->get_result();
+    $linha = $resultado->fetch_assoc();
     return $linha;
 }
 
